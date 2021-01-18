@@ -41,5 +41,5 @@ DNS.2 = *.localhost
 DNS.3 = *.picornell.dev
 " > san.cnf
 
-openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout key.pem -out cert.pem -config san.cnf
+openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout local.key -out local.cert -config san.cnf
 rm san.cnf
