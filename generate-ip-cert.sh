@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IP=$(echo $1 | egrep -o "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
+IP=$(echo $1 | ipconfig getifaddr en1 | ipconfig getifaddr en0 | egrep -o "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
 
 if [ ! $IP ]
 then
@@ -29,7 +29,16 @@ subjectAltName = @alt_names
 subjectAltName = @alt_names
 
 [alt_names]
-IP.1 = $IP
+IP.1 = 127.0.0.1
+IP.2 = 192.168.0.10
+IP.3 = 192.168.1.10
+IP.4 = 192.168.2.10
+IP.5 = 192.168.43.12
+IP.6 = $IP
+
+DNS.1 = localhost
+DNS.2 = *.localhost
+DNS.3 = *.picornell.dev
 " > san.cnf
 
 openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout key.pem -out cert.pem -config san.cnf
