@@ -1,6 +1,6 @@
 #!/bin/sh
 
-IP=$(echo $1 | ipconfig getifaddr en1 | ipconfig getifaddr en0 | egrep -o "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
+IP=$(echo $1 || ipconfig getifaddr en1 || ipconfig getifaddr en0 | egrep -o "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$")
 
 if [ ! $IP ]
 then
